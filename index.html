@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>WaveStrap</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Segoe UI, Arial;
+    color:white;
+    background:
+    radial-gradient(circle at 20% 10%, rgba(56,189,248,.2), transparent 35%),
+    radial-gradient(circle at 80% 20%, rgba(96,165,250,.15), transparent 40%),
+    radial-gradient(circle at 10% 80%, rgba(167,139,250,.15), transparent 35%),
+    linear-gradient(135deg,#05060a,#070b14,#050505);
+    min-height:100vh;
+}
+
+.wrapper{
+    width:1100px;
+    max-width:95%;
+    margin:auto;
+    padding-top:60px;
+}
+
+.panel{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    border-radius:22px;
+    background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(0,0,0,.3));
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 25px 60px rgba(0,0,0,.5);
+    overflow:hidden;
+}
+
+.sidebar{
+    padding:30px;
+    border-right:1px solid rgba(255,255,255,.1);
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    border-radius:20px;
+    background:#0e0f14;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:12px;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.logo img{
+    width:60px;
+}
+
+.title{
+    font-size:22px;
+    font-weight:600;
+}
+
+.tag{
+    display:inline-block;
+    background:#1238BDF8;
+    border:1px solid #2A38BDF8;
+    color:#7DD3FC;
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:999px;
+    margin-right:8px;
+}
+
+.version{
+    font-size:12px;
+    color:#9ca3af;
+}
+
+.btn{
+    margin-top:16px;
+    padding:12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.05);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    border-color:#38bdf8;
+}
+
+.content{
+    padding:40px;
+}
+
+.heading{
+    font-size:28px;
+    font-weight:600;
+}
+
+.sub{
+    color:#9ca3af;
+    margin-top:6px;
+}
+
+.card{
+    margin-top:28px;
+    padding:22px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#111827,#0b1220);
+    border:1px solid rgba(125,211,252,.25);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:.25s;
+}
+
+.card:hover{
+    border-color:#38bdf8;
+    transform:translateY(-2px);
+}
+
+.cardTitle{
+    font-size:16px;
+    font-weight:600;
+}
+
+.cardSub{
+    color:#9ca3af;
+    font-size:13px;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:11px;
+    color:#6b7280;
+}
+
+.tip{
+    margin-top:20px;
+    padding:12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(0,0,0,.3);
+    font-size:12px;
+    color:#9ca3af;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="panel">
+
+<div class="sidebar">
+
+<div class="logo">
+<img src="wave.png">
+</div>
+
+<div class="title">WaveStrap</div>
+
+<div style="margin-top:10px">
+<span class="tag">production</span>
+<span class="version">v1.0.0</span>
+</div>
+
+<div class="btn">Fix Wave</div>
+<div class="btn">Discord</div>
+
+<div class="tip">
+WaveStrap must be open before launching to inject the multi-instance bypass.
+</div>
+
+<div class="footer">
+© 2026 RedFox & psyvor
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="heading">Welcome back</div>
+<div class="sub">Launch Roblox through WaveStrap</div>
+
+<div class="card">
+
+<div>
+<div class="cardTitle">Launch Roblox</div>
+<div class="cardSub">Normal install / latest client</div>
+</div>
+
+<div>→</div>
+
+</div>
+
+<div class="card">
+
+<div>
+<div class="cardTitle">Downgrade Roblox</div>
+<div class="cardSub">Revert to a previous version</div>
+</div>
+
+<div>→</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
