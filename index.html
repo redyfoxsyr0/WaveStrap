@@ -3,314 +3,373 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>WaveStrap</title>
 
 <style>
+:root{
+    --bg1:#05060a;
+    --bg2:#070b14;
+    --bg3:#050505;
+    --text:#ffffff;
+    --muted:#9ca3af;
+    --muted2:#6b7280;
+    --line:rgba(255,255,255,.10);
+    --line2:rgba(125,211,252,.22);
+    --card1:#071120;
+    --card2:#040917;
+    --blue:#7DD3FC;
+    --blue2:#38BDF8;
+}
 
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-margin:0;
-font-family:Segoe UI,Arial;
-color:white;
-
-background:
-radial-gradient(circle at 10% 10%, rgba(125,211,252,.25), transparent 40%),
-radial-gradient(circle at 80% 20%, rgba(96,165,250,.18), transparent 40%),
-radial-gradient(circle at 20% 80%, rgba(167,139,250,.15), transparent 35%),
-linear-gradient(135deg,#05060a,#070b14,#050505);
-
-min-height:100vh;
+    margin:0;
+    font-family:Segoe UI, Arial, sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 10%, rgba(125,211,252,.25), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(96,165,250,.18), transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(167,139,250,.15), transparent 35%),
+        linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+    min-height:100vh;
 }
 
-.wrapper{
-width:1100px;
-max-width:95%;
-margin:auto;
-padding-top:60px;
+.page{
+    width:min(1200px, 95%);
+    margin:0 auto;
+    padding:32px 0 48px;
 }
 
-.panel{
-display:grid;
-grid-template-columns:260px 1fr;
-border-radius:22px;
-background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(0,0,0,.35));
-border:1px solid rgba(255,255,255,.1);
-box-shadow:0 30px 70px rgba(0,0,0,.6);
-overflow:hidden;
+.shell{
+    border:1px solid var(--line);
+    border-radius:22px;
+    overflow:hidden;
+    background:linear-gradient(145deg, rgba(255,255,255,.04), rgba(0,0,0,.30));
+    box-shadow:0 30px 70px rgba(0,0,0,.45);
 }
 
-.sidebar{
-padding:30px;
-border-right:1px solid rgba(255,255,255,.1);
-}
-
-.logo{
-width:70px;
-height:70px;
-border-radius:20px;
-background:#0e0f14;
-display:flex;
-align-items:center;
-justify-content:center;
-margin-bottom:12px;
-border:1px solid rgba(255,255,255,.1);
-}
-
-.logo img{
-width:60px;
+.topbar{
+    padding:28px 28px 0 28px;
 }
 
 .title{
-font-size:22px;
-font-weight:600;
+    font-size:28px;
+    font-weight:700;
+    margin:0;
 }
 
-.tag{
-display:inline-block;
-background:#1238BDF8;
-border:1px solid #2A38BDF8;
-color:#7DD3FC;
-font-size:11px;
-padding:5px 10px;
-border-radius:999px;
-margin-right:8px;
+.subtitle{
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:14px;
 }
 
-.version{
-font-size:12px;
-color:#9ca3af;
+.layout{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:0;
+    min-height:700px;
 }
 
-.footer{
-margin-top:40px;
-font-size:11px;
-color:#6b7280;
+.sidebar{
+    padding:24px 18px 24px 24px;
+    border-right:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+}
+
+.sidebar-inner{
+    position:sticky;
+    top:24px;
+}
+
+.logo-wrap{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.logo{
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    background:#0e0f14;
+    border:1px solid rgba(255,255,255,.10);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    box-shadow:0 10px 24px rgba(0,0,0,.30);
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    object-fit:contain;
+}
+
+.brand{
+    font-size:18px;
+    font-weight:700;
+}
+
+.side-section-title{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--muted2);
+    margin:18px 0 10px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.nav a{
+    color:#dbe7f5;
+    text-decoration:none;
+    padding:11px 12px;
+    border-radius:12px;
+    border:1px solid transparent;
+    background:rgba(255,255,255,.02);
+    transition:.2s ease;
+    font-size:14px;
+}
+
+.nav a:hover{
+    border-color:rgba(56,189,248,.30);
+    background:rgba(56,189,248,.08);
+    color:#fff;
+}
+
+.dev-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.dev-chip{
+    padding:10px 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.06);
+    color:#dbe7f5;
+    font-size:14px;
 }
 
 .content{
-padding:40px;
-overflow-y:auto;
+    padding:24px 28px 28px 28px;
 }
 
-.heading{
-font-size:28px;
-font-weight:600;
+.card{
+    background:linear-gradient(135deg, var(--card1), var(--card2));
+    border:1px solid var(--line2);
+    border-radius:20px;
+    padding:24px;
+    margin-bottom:24px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
 }
 
-.sub{
-color:#9ca3af;
-margin-top:6px;
-margin-bottom:30px;
+.card h2{
+    margin:0 0 18px;
+    font-size:18px;
+    font-weight:700;
 }
 
-.section{
-margin-bottom:24px;
-padding:24px;
-border-radius:18px;
-background:linear-gradient(135deg,#111827,#0b1220);
-border:1px solid rgba(125,211,252,.2);
-}
-
-.section h2{
-margin-top:0;
-font-size:18px;
-}
-
-.section p{
-color:#cbd5e1;
-font-size:14px;
-line-height:1.7;
+.card p{
+    margin:0 0 16px;
+    line-height:1.75;
+    color:#e5eef9;
+    font-size:14px;
 }
 
 .code{
-margin-top:12px;
-padding:12px;
-border-radius:10px;
-background:#020617;
-border:1px solid rgba(255,255,255,.05);
-font-family:Consolas,monospace;
-font-size:13px;
-color:#7DD3FC;
+    margin-top:12px;
+    background:#020617;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:14px;
+    padding:14px;
+    overflow:auto;
+    color:var(--blue);
+    font-family:Consolas, monospace;
+    font-size:13px;
+    line-height:1.5;
+    white-space:pre;
 }
 
+.links a{
+    display:block;
+    color:#dbe7f5;
+    text-decoration:none;
+    padding:10px 12px;
+    border-radius:12px;
+    background:rgba(255,255,255,.02);
+    border:1px solid rgba(255,255,255,.06);
+    margin-bottom:8px;
+}
+
+.links a:hover{
+    border-color:rgba(56,189,248,.30);
+    background:rgba(56,189,248,.08);
+}
+
+@media (max-width: 900px){
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+    }
+
+    .sidebar-inner{
+        position:static;
+    }
+}
 </style>
 </head>
-
 <body>
 
-<div class="wrapper">
+<div class="page">
+    <div class="shell">
+        <div class="topbar">
+            <h1 class="title">WaveStrap</h1>
+            <p class="subtitle">Roblox launch manager for the Wave ecosystem</p>
+        </div>
 
-<div class="panel">
+        <div class="layout">
+            <aside class="sidebar">
+                <div class="sidebar-inner">
+                    <div class="logo-wrap">
+                        <div class="logo">
+                            <img src="wave.png" alt="WaveStrap Logo">
+                        </div>
+                        <div class="brand">WaveStrap</div>
+                    </div>
 
-<div class="sidebar">
+                    <div class="side-section-title">Topics</div>
+                    <nav class="nav">
+                        <a href="#overview">Overview</a>
+                        <a href="#wave-executor">Support for the Wave Executor</a>
+                        <a href="#version-management">Version Management</a>
+                        <a href="#multi-instance">Multi-Instance Support</a>
+                        <a href="#installation-detection">Installation Detection</a>
+                        <a href="#fixwave">FixWave Repair Utility</a>
+                    </nav>
 
-<div class="logo">
-<img src="wave.png">
-</div>
+                    <div class="side-section-title">Creators</div>
+                    <div class="dev-list">
+                        <div class="dev-chip">RedFox</div>
+                        <div class="dev-chip">psyvor</div>
+                    </div>
 
-<div class="title">WaveStrap</div>
+                    <div class="side-section-title">Links</div>
+                    <div class="links">
+                        <a href="https://github.com/" target="_blank">GitHub</a>
+                        <a href="https://discord.com/" target="_blank">Discord</a>
+                        <a href="#overview">Back to top</a>
+                    </div>
+                </div>
+            </aside>
 
-<div style="margin-top:10px">
-<span class="tag">production</span>
-<span class="version">v1.0.0</span>
-</div>
+            <main class="content">
+                <section class="card" id="overview">
+                    <h2>Overview</h2>
+                    <p>
+                        WaveStrap is a lightweight Roblox launcher and runtime environment manager designed
+                        to control how Roblox is installed, prepared, and launched.
+                    </p>
+                    <p>
+                        Instead of launching Roblox through the default browser bootstrap system, WaveStrap
+                        locates the Roblox client directly and launches it within a controlled environment.
+                        This allows WaveStrap to manage how Roblox starts, which version runs, and how the
+                        runtime environment is prepared.
+                    </p>
+                </section>
 
-<div class="footer">
-© 2026 RedFox & psyvor
-</div>
+                <section class="card" id="wave-executor">
+                    <h2>Support for the Wave Executor</h2>
+                    <p>
+                        WaveStrap is designed to support the Wave executor by ensuring that Roblox launches
+                        in a predictable and stable environment.
+                    </p>
+                    <p>
+                        Because Roblox updates frequently, launch behavior can change and disrupt tools that
+                        rely on consistent process startup. WaveStrap avoids this by starting the Roblox client
+                        directly instead of using the web bootstrap launcher.
+                    </p>
+                    <div class="code">ProcessStartInfo psi = new ProcessStartInfo
+{
+    FileName = "RobloxPlayerBeta.exe",
+    Arguments = "--app",
+    UseShellExecute = true
+};
 
-</div>
+Process.Start(psi);</div>
+                </section>
 
-<div class="content">
+                <section class="card" id="version-management">
+                    <h2>Version Management</h2>
+                    <p>
+                        WaveStrap can launch both the latest Roblox client and previously stored client builds.
+                        This helps maintain compatibility when new Roblox updates introduce breaking changes.
+                    </p>
+                    <p>
+                        Downgraded clients are stored in a dedicated WaveStrap directory and can be launched
+                        directly whenever a specific version is needed for testing or compatibility.
+                    </p>
+                    <div class="code">%LOCALAPPDATA%\WaveStrap\WaveStrapDowngrade</div>
+                </section>
 
-<div class="heading">WaveStrap</div>
-<div class="sub">Roblox launch manager for the Wave ecosystem</div>
+                <section class="card" id="multi-instance">
+                    <h2>Multi-Instance Support</h2>
+                    <p>
+                        Roblox normally restricts execution to a single running instance. WaveStrap prepares
+                        the runtime environment so multiple Roblox clients can run simultaneously when needed.
+                    </p>
+                    <p>
+                        This is done by reserving synchronization objects that Roblox normally uses for
+                        single-instance enforcement before the client starts.
+                    </p>
+                    <div class="code">Mutex singletonEvent = new Mutex(true, "ROBLOX_singletonEvent");
+Mutex singletonMutex = new Mutex(true, "ROBLOX_singletonMutex");</div>
+                </section>
 
+                <section class="card" id="installation-detection">
+                    <h2>Installation Detection</h2>
+                    <p>
+                        WaveStrap searches multiple common Roblox installation paths to locate the client
+                        and ensure the correct executable is launched.
+                    </p>
+                    <p>
+                        If Roblox is installed outside the preferred layout, WaveStrap can restore a more
+                        consistent runtime structure so launch behavior remains reliable.
+                    </p>
+                    <div class="code">%LOCALAPPDATA%\Roblox\Versions
+%LOCALAPPDATA%\Programs\Roblox
+Program Files\Roblox
+Program Files (x86)\Roblox</div>
+                </section>
 
-<div class="section">
-
-<h2>Overview</h2>
-
-<p>
-WaveStrap is a lightweight Roblox launcher and runtime environment manager designed
-to control how Roblox is installed, prepared, and launched.
-</p>
-
-<p>
-Instead of launching Roblox through the default browser bootstrap system,
-WaveStrap locates the Roblox client directly and launches it within a
-controlled environment. This allows WaveStrap to manage how Roblox starts,
-which version runs, and how the runtime environment is prepared.
-</p>
-
-</div>
-
-
-<div class="section">
-
-<h2>Support for the Wave Executor</h2>
-
-<p>
-WaveStrap is designed to support the Wave executor by ensuring that Roblox
-launches in a predictable and stable environment.
-</p>
-
-<p>
-Because Roblox updates frequently, launch behavior can change and disrupt
-tools that rely on consistent process startup. WaveStrap avoids this by
-starting the Roblox client directly instead of using the web bootstrap
-launcher.
-</p>
-
-<div class="code">
-
-ProcessStartInfo psi = new ProcessStartInfo<br>
-{<br>
-&nbsp;&nbsp;FileName = "RobloxPlayerBeta.exe",<br>
-&nbsp;&nbsp;Arguments = "--app",<br>
-&nbsp;&nbsp;UseShellExecute = true<br>
-};<br><br>
-
-Process.Start(psi);
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2>Version Management</h2>
-
-<p>
-WaveStrap can launch both the latest Roblox client and previously stored
-client builds. This allows compatibility to be maintained when new Roblox
-updates introduce breaking changes.
-</p>
-
-<p>
-Downgraded clients are stored in the WaveStrap downgrade directory and
-can be launched directly when needed.
-</p>
-
-<div class="code">
-
-%LOCALAPPDATA%\\WaveStrap\\WaveStrapDowngrade
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2>Multi-Instance Support</h2>
-
-<p>
-Roblox normally restricts execution to a single running instance.
-WaveStrap prepares the runtime environment so multiple Roblox
-clients can run simultaneously.
-</p>
-
-<p>
-This is done by reserving synchronization objects used by Roblox
-for single-instance enforcement.
-</p>
-
-<div class="code">
-
-Mutex singletonEvent = new Mutex(true, "ROBLOX_singletonEvent");<br>
-Mutex singletonMutex = new Mutex(true, "ROBLOX_singletonMutex");
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2>Installation Detection</h2>
-
-<p>
-WaveStrap automatically searches common Roblox installation locations
-to locate the client. If Roblox is installed outside the expected
-directory structure, WaveStrap can relocate the client to ensure a
-consistent runtime layout.
-</p>
-
-<div class="code">
-
-%LOCALAPPDATA%\\Roblox\\Versions<br>
-%LOCALAPPDATA%\\Programs\\Roblox<br>
-Program Files\\Roblox<br>
-Program Files (x86)\\Roblox
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2>FixWave Repair Utility</h2>
-
-<p>
-WaveStrap includes a repair tool called FixWave which resolves
-runtime issues affecting Roblox or the Wave environment.
-</p>
-
-<p>
-The repair utility can reset dependencies, reinstall required
-runtime components, and repair broken Roblox installations
-to ensure WaveStrap and the Wave executor function correctly.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
+                <section class="card" id="fixwave">
+                    <h2>FixWave Repair Utility</h2>
+                    <p>
+                        WaveStrap includes a repair utility called FixWave that helps resolve runtime issues
+                        affecting Roblox or the Wave environment.
+                    </p>
+                    <p>
+                        This can include repairing corrupted installations, restoring missing dependencies,
+                        and fixing environment issues that prevent Roblox or related tooling from working
+                        correctly.
+                    </p>
+                </section>
+            </main>
+        </div>
+    </div>
 </div>
 
 </body>
