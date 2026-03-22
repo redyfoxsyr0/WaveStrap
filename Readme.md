@@ -1,1 +1,1 @@
-Down For Rewrite Stay tune adding auto update system 
+ALL INFO CAN BE FOUND HERE: https://redyfoxsyr0.github.io/WaveStrap/
