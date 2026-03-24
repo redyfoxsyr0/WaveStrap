@@ -9,36 +9,38 @@
             --bg1: #05060a;
             --bg2: #070b14;
             --bg3: #050505;
+            --panel: rgba(255,255,255,.04);
             --line: rgba(255,255,255,.10);
             --line2: rgba(125,211,252,.22);
+            --text: #fff;
+            --muted: #9ca3af;
+            --muted2: #6b7280;
             --blue: #7dd3fc;
             --blue2: #38bdf8;
-            --purple: #a78bfa;
             --cardA: #071120;
             --cardB: #040917;
-            --shadow: 0 30px 80px rgba(0,0,0,.6);
+            --shadow: 0 25px 60px rgba(0,0,0,.45);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #fff;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(125,211,252,.25), transparent 50%),
-                radial-gradient(circle at 85% 15%, rgba(167,139,250,.20), transparent 50%),
-                radial-gradient(circle at 20% 85%, rgba(96,165,250,.16), transparent 45%),
-                linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+            margin: 0;
+            font-family: Segoe UI, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 10% 10%, rgba(125,211,252,.18), transparent 40%),
+                        radial-gradient(circle at 80% 20%, rgba(96,165,250,.14), transparent 40%),
+                        radial-gradient(circle at 20% 80%, rgba(167,139,250,.10), transparent 34%),
+                        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
             min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.65;
         }
 
         .page {
             width: min(1240px, 95%);
             margin: 0 auto;
-            padding: 16px 0 40px;
+            padding: 20px 0 40px;
         }
 
         .shell {
@@ -46,126 +48,118 @@
             overflow: hidden;
             border: 1px solid var(--line);
             border-radius: 24px;
-            background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(0,0,0,.35));
+            background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(0,0,0,.28));
             box-shadow: var(--shadow);
-            backdrop-filter: blur(12px);
         }
 
-        /* === CRAZY FIRE NEON ORBS === */
         .ambient {
             position: absolute;
             inset: 0;
             pointer-events: none;
             overflow: hidden;
-            z-index: 1;
         }
 
         .orb {
             position: absolute;
-            border-radius: 9999px;
-            filter: blur(70px);
-            opacity: 0.25;
-            mix-blend-mode: screen;
-            animation: orbFloat 20s ease-in-out infinite alternate;
+            border-radius: 999px;
+            opacity: .16;
+            animation: orbFloat 14s ease-in-out infinite alternate;
         }
 
         .orb.one {
-            width: 520px; height: 520px;
-            left: -140px; top: -160px;
-            background: radial-gradient(circle, rgba(125,211,252,.75) 10%, rgba(56,189,248,.30) 55%, transparent 80%);
-            animation-duration: 24s;
+            width: 420px; height: 420px;
+            left: -80px; top: -120px;
+            background: radial-gradient(circle, rgba(125,211,252,.42) 0%, rgba(56,189,248,.10) 40%, transparent 72%);
         }
 
         .orb.two {
-            width: 600px; height: 600px;
-            right: -180px; top: -100px;
-            background: radial-gradient(circle, rgba(167,139,250,.65) 10%, rgba(96,165,250,.25) 60%, transparent 85%);
-            animation-duration: 28s;
+            width: 460px; height: 460px;
+            right: -140px; top: 0;
+            background: radial-gradient(circle, rgba(96,165,250,.30) 0%, rgba(76,29,149,.10) 40%, transparent 74%);
+            animation-duration: 17s;
         }
 
         .orb.three {
-            width: 440px; height: 440px;
-            left: 22%; bottom: -200px;
-            background: radial-gradient(circle, rgba(125,211,252,.55) 15%, rgba(167,139,250,.22) 65%, transparent 85%);
-            animation-duration: 21s;
+            width: 340px; height: 340px;
+            left: 20%; bottom: -120px;
+            background: radial-gradient(circle, rgba(167,139,250,.22) 0%, rgba(167,139,250,.08) 36%, transparent 72%);
+            animation-duration: 13s;
         }
 
         .topbar {
             position: relative;
-            z-index: 3;
-            padding: 28px 24px 12px;
+            z-index: 2;
+            padding: 28px 24px 10px;
         }
 
         .title {
-            font-size: clamp(26px, 7.5vw, 38px);
+            margin: 0;
+            font-size: 30px;
             font-weight: 700;
-            letter-spacing: -0.04em;
-            text-shadow: 
-                0 0 15px var(--blue),
-                0 0 30px var(--blue2),
-                0 0 55px rgba(167,139,250,.8);
+            letter-spacing: -0.03em;
         }
 
         .subtitle {
-            margin-top: 8px;
-            color: #9ca3af;
-            font-size: clamp(14px, 4vw, 16px);
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 15px;
         }
 
         .layout {
             position: relative;
-            z-index: 3;
+            z-index: 2;
             display: grid;
             grid-template-columns: 280px 1fr;
-            min-height: 800px;
+            min-height: 820px;
         }
 
         .sidebar {
-            padding: 24px 20px 32px 24px;
+            padding: 24px 18px 24px 24px;
             border-right: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+            background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
         }
 
-        .sidebar-inner { position: sticky; top: 24px; }
+        .sidebar-inner {
+            position: sticky;
+            top: 24px;
+        }
 
         .logo-wrap {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 14px;
+            margin-bottom: 18px;
         }
 
         .logo {
-            width: 70px;
-            height: 70px;
+            width: 66px;
+            height: 66px;
             border-radius: 18px;
             background: #0e0f14;
-            border: 1px solid rgba(125,211,252,.35);
+            border: 1px solid rgba(255,255,255,.1);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,.45),
-                        0 0 30px rgba(125,211,252,.3);
-            animation: logoFloat 5.5s ease-in-out infinite;
+            box-shadow: 0 10px 24px rgba(0,0,0,.30);
+            animation: logoFloat 6s ease-in-out infinite;
         }
 
         .logo img {
-            width: 58px;
-            height: 58px;
+            width: 56px;
+            height: 56px;
             object-fit: contain;
         }
 
         .brand {
-            font-size: 23px;
+            font-size: 20px;
             font-weight: 700;
-            letter-spacing: -0.03em;
-            text-shadow: 0 0 15px var(--blue);
+            letter-spacing: -0.02em;
         }
 
         .brand-sub {
-            font-size: 12.5px;
-            color: #9ca3af;
+            font-size: 12px;
+            color: var(--muted);
             margin-top: 4px;
         }
 
@@ -173,8 +167,8 @@
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: .12em;
-            color: #6b7280;
-            margin: 26px 0 10px;
+            color: var(--muted2);
+            margin: 22px 0 10px;
         }
 
         .nav {
@@ -187,61 +181,49 @@
             display: block;
             text-decoration: none;
             color: #dbe7f5;
-            padding: 13px 14px;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,.07);
+            padding: 11px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,.06);
             background: rgba(255,255,255,.025);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform .2s ease, border-color .2s ease, background .2s ease;
         }
 
         .nav a:hover, .ext-link:hover, .person:hover {
-            transform: translateX(8px) scale(1.03);
-            border-color: var(--blue2);
-            background: rgba(56,189,248,.13);
-            box-shadow: 0 0 22px rgba(56,189,248,.3);
+            transform: translateX(4px);
+            border-color: rgba(56,189,248,.32);
+            background: rgba(56,189,248,.08);
         }
 
         .content {
-            padding: 24px 28px 32px;
+            padding: 24px 26px 28px;
         }
 
         .hero-card, .card {
             background: linear-gradient(135deg, var(--cardA), var(--cardB));
             border: 1px solid var(--line2);
-            border-radius: 20px;
-            padding: 26px;
-            box-shadow: inset 0 2px 0 rgba(255,255,255,.03),
-                        0 12px 45px rgba(0,0,0,.4);
-            position: relative;
-            overflow: hidden;
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
         }
 
         .hero-card {
-            margin-bottom: 28px;
-            animation: cardDrift1 8s ease-in-out infinite;
+            margin-bottom: 24px;
+            animation: cardDrift1 7s ease-in-out infinite;
         }
 
         .card {
-            margin-bottom: 28px;
-            animation: cardDrift2 10s ease-in-out infinite;
+            margin-bottom: 24px;
+            animation: cardDrift2 9s ease-in-out infinite;
         }
 
         .card:nth-of-type(2n) {
-            animation: cardDrift3 13s ease-in-out infinite;
-        }
-
-        h2 {
-            font-size: 21px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-shadow: 0 0 16px var(--blue);
+            animation: cardDrift3 11s ease-in-out infinite;
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: 1.2fr .8fr;
             gap: 18px;
-            margin-top: 18px;
         }
 
         .hero-stat {
@@ -258,23 +240,47 @@
         }
 
         .hero-stat span {
-            color: #9ca3af;
+            color: var(--muted);
             font-size: 13px;
             line-height: 1.6;
         }
 
+        .card h2, .hero-card h2 {
+            margin: 0 0 16px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .card p, .hero-card p {
+            margin: 0 0 16px;
+            line-height: 1.8;
+            color: #e5eef9;
+            font-size: 14px;
+        }
+
+        .card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #e5eef9;
+        }
+
+        .card li {
+            margin: 0 0 10px;
+            line-height: 1.7;
+        }
+
         .code {
-            margin-top: 16px;
+            margin-top: 14px;
             background: #020617;
-            border: 1px solid rgba(125,211,252,.18);
+            border: 1px solid rgba(255,255,255,.05);
             border-radius: 14px;
-            padding: 16px;
+            padding: 14px;
             overflow: auto;
             color: var(--blue);
             font-family: Consolas, monospace;
-            font-size: 13px;
-            line-height: 1.55;
-            box-shadow: inset 0 4px 15px rgba(0,0,0,.7);
+            font-size: 12.5px;
+            line-height: 1.5;
+            white-space: pre;
         }
 
         .split {
@@ -287,62 +293,68 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 16px;
+            margin-top: 10px;
         }
 
         .pill {
-            padding: 9px 15px;
+            padding: 8px 12px;
             border-radius: 999px;
-            background: rgba(56,189,248,.13);
-            border: 1px solid rgba(56,189,248,.38);
-            color: var(--blue2);
-            font-size: 13px;
-            box-shadow: 0 0 18px rgba(56,189,248,.25);
+            background: rgba(56,189,248,.10);
+            border: 1px solid rgba(56,189,248,.22);
+            color: var(--blue);
+            font-size: 12px;
         }
 
         .footer {
-            padding: 20px 28px 32px;
-            color: #6b7280;
-            font-size: 12.5px;
+            padding: 0 28px 28px;
+            color: var(--muted2);
+            font-size: 12px;
             text-align: center;
         }
 
-        /* Animations */
+        /* Original Animations */
         @keyframes orbFloat {
-            from { transform: translate3d(0, 0, 0) scale(1); }
-            to { transform: translate3d(45px, 35px, 0) scale(1.1); }
+            from { transform: translate3d(0,0,0) scale(1); }
+            to { transform: translate3d(30px,18px,0) scale(1.06); }
         }
 
         @keyframes logoFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-9px) rotate(4deg); }
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        @keyframes cardDrift1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-        @keyframes cardDrift2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(5px,-6px); } }
-        @keyframes cardDrift3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-5px,-5px); } }
+        @keyframes cardDrift1 {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
 
-        /* Mobile Responsive */
+        @keyframes cardDrift2 {
+            0%,100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-5px) translateX(2px); }
+        }
+
+        @keyframes cardDrift3 {
+            0%,100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-3px) translateX(-2px); }
+        }
+
+        /* Mobile Support */
         @media (max-width: 980px) {
             .layout { grid-template-columns: 1fr; }
-            .sidebar { border-right: none; border-bottom: 1px solid var(--line); padding: 20px 18px; }
+            .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
             .sidebar-inner { position: static; }
             .hero-grid, .split { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
-            .page { padding: 12px 0 30px; }
-            .shell { border-radius: 18px; margin: 0 6px; }
+            .page { padding: 12px 0 32px; }
+            .shell { border-radius: 18px; margin: 0 8px; }
             .topbar, .content { padding-left: 18px; padding-right: 18px; }
-            .hero-card, .card { padding: 22px; }
-            .code { font-size: 12.2px; padding: 13px; }
-            .logo { width: 56px; height: 56px; }
-            .logo img { width: 48px; height: 48px; }
-        }
-
-        @media (max-width: 480px) {
-            .orb { opacity: 0.14; filter: blur(60px); }
-            .nav a, .ext-link, .person { padding: 14px 16px; font-size: 15px; }
+            .title { font-size: 26px; }
+            .hero-card, .card { padding: 20px; }
+            .code { font-size: 12px; padding: 12px; }
+            .logo { width: 58px; height: 58px; }
+            .logo img { width: 50px; height: 50px; }
         }
     </style>
 </head>
@@ -361,13 +373,10 @@
             </div>
 
             <div class="layout">
-                <!-- Sidebar -->
                 <aside class="sidebar">
                     <div class="sidebar-inner">
                         <div class="logo-wrap">
-                            <div class="logo">
-                                <img src="https://raw.githubusercontent.com/redyfoxsyr0/WaveStrap/main/Wave.png" alt="WaveStrap Logo">
-                            </div>
+                            <div class="logo"><img src="https://raw.githubusercontent.com/redyfoxsyr0/WaveStrap/main/Wave.png" alt="WaveStrap Logo"></div>
                             <div>
                                 <div class="brand">WaveStrap</div>
                                 <div class="brand-sub">Project navigation</div>
@@ -400,7 +409,6 @@
                     </div>
                 </aside>
 
-                <!-- Main Content -->
                 <main class="content">
                     <section class="hero-card" id="overview">
                         <h2>Overview</h2>
@@ -425,28 +433,30 @@
                         <p>The core structure looks like this: UI windows handle user interaction, service classes handle install and launch logic, API clients fetch version information, and helper classes persist state or register protocol handlers. The updater project exists separately, which suggests the main application and update flow are intentionally isolated.</p>
                         <div class="split">
                             <div class="code small-code">Wave-Strap ├── SetupWindow.xaml ├── HomeWindow.xaml ├── DowngradeWindow.xaml ├── BootWindow.xaml ├── ConfigService.cs ├── InstallService.cs ├── LaunchService.cs ├── LiveVersionTracker.cs ├── ProtocolRegistration.cs ├── PendingLaunch.cs ├── RddClient.cs ├── WeaoClient.cs └── WaveStrap.Updater</div>
-                            <div class="code small-code">UI Layer - Setup and navigation windows - User-facing actions and status<br>Service Layer - Install verification - Launch routing - Version detection - Protocol mapping<br>Remote Layer - Current live version lookup - Previous version lookup - Downgrade metadata</div>
+                            <div class="code small-code">UI Layer - Setup and navigation windows - User-facing actions and status Service Layer - Install verification - Launch routing - Version detection - Protocol mapping Remote Layer - Current live version lookup - Previous version lookup - Downgrade metadata</div>
                         </div>
                     </section>
 
                     <section class="card" id="setup-window">
                         <h2>Setup Experience</h2>
-                        <p>The <b>SetupWindow</b> is the first-run configuration experience. It establishes where WaveStrap should store its client data and whether the application should register itself as the handler for Roblox launch requests.</p>
-                        <p>The UI itself matches the rest of the project: dark gradients, rounded chrome, custom title controls, and soft glass panels. More importantly, the code-behind shows what setup actually does.</p>
-                        <div class="code">&lt;Window x:Class="WaveStrap.SetupWindow" Title="WaveStrap Setup" Width="540" Height="420" WindowStyle="None" AllowsTransparency="True"&gt;<br>&lt;TextBox x:Name="PathBox" /&gt;<br>&lt;CheckBox x:Name="ProtocolBox" Content="Set WaveStrap as roblox:// handler" IsChecked="True" /&gt;<br>&lt;Button Content="Save &amp; Continue" Click="Save_Click" /&gt;<br>&lt;/Window&gt;</div>
-                        <div class="code">private void Save_Click(object sender, RoutedEventArgs e) {<br>    var cfg = new WaveConfig { InstallPath = PathBox.Text?.Trim() ?? "", Channel = "production", RegisterProtocol = ProtocolBox.IsChecked == true };<br>    if (string.IsNullOrWhiteSpace(cfg.InstallPath)) {<br>        cfg.InstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WaveStrap", "Client");<br>    }<br>    ConfigService.Save(cfg);<br>    if (cfg.RegisterProtocol) ProtocolRegistration.Ensure(robloxHookEnabled: true);<br>    var home = new HomeWindow(); home.Show(); Close();<br>}</div>
+                        <p>The <b>SetupWindow</b> is the first-run configuration experience. It establishes where WaveStrap should store its client data and whether the application should register itself as the handler for Roblox launch requests. That makes it the first place where WaveStrap turns from a normal desktop app into a launch controller.</p>
+                        <p>The UI itself matches the rest of the project: dark gradients, rounded chrome, custom title controls, and soft glass panels. More importantly, the code-behind shows what setup actually does. It writes a <b>WaveConfig</b>, persists the selected install path, optionally enables protocol registration, and then moves directly into the main launcher window.</p>
+                        <div class="code">&lt;Window x:Class="WaveStrap.SetupWindow" Title="WaveStrap Setup" Width="540" Height="420" WindowStyle="None" AllowsTransparency="True"&gt; &lt;TextBox x:Name="PathBox" /&gt; &lt;CheckBox x:Name="ProtocolBox" Content="Set WaveStrap as roblox:// handler" IsChecked="True" /&gt; &lt;Button Content="Save &amp; Continue" Click="Save_Click" /&gt; &lt;/Window&gt;</div>
+                        <div class="code">private void Save_Click(object sender, RoutedEventArgs e) { var cfg = new WaveConfig { InstallPath = PathBox.Text?.Trim() ?? "", Channel = "production", RegisterProtocol = ProtocolBox.IsChecked == true }; if (string.IsNullOrWhiteSpace(cfg.InstallPath)) { cfg.InstallPath = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WaveStrap", "Client" ); } ConfigService.Save(cfg); if (cfg.RegisterProtocol) ProtocolRegistration.Ensure(robloxHookEnabled: true); var home = new HomeWindow(); home.Show(); Close(); }</div>
                     </section>
 
                     <section class="card" id="launch-flow">
                         <h2>Launch Pipeline</h2>
-                        <p>The shared <b>LaunchService</b> is one of the most important parts of WaveStrap. It checks for the live version, searches across possible install roots, can restore Roblox into the expected AppData versions tree, normalizes protocol input, and only then starts the player executable.</p>
-                        <div class="code">public static bool Launch(string? protocol = null) {<br>    try {<br>        string? liveHash = TryGetLiveHash();<br>        var found = FindInstalledPlayer(liveHash);<br>        if (found == null) return false;<br>        var ensured = EnsureRobloxInAppData(found.Value.exe, found.Value.dir, liveHash);<br>        if (ensured == null) return false;<br>        string? uri = NormalizeRobloxPlayerUri(protocol);<br>        return StartRoblox(ensured.Value.exe, ensured.Value.dir, uri);<br>    } catch { return false; }<br>}</div>
-                        <div class="code">private static bool StartRoblox(string exePath, string workingDir, string? uri) {<br>    var psi = new ProcessStartInfo { FileName = exePath, WorkingDirectory = workingDir, UseShellExecute = true };<br>    if (!string.IsNullOrWhiteSpace(uri)) psi.Arguments = `"${uri}"`;<br>    else psi.Arguments = "--app";<br>    try { return Process.Start(psi) != null; } catch { return false; }<br>}</div>
+                        <p>The shared <b>LaunchService</b> is one of the most important parts of WaveStrap. It does not assume Roblox is already in the right place. It checks for the live version, searches across possible install roots, can restore Roblox into the expected AppData versions tree, normalizes protocol input, and only then starts the player executable.</p>
+                        <p>That means WaveStrap is acting as a controlled launch pipeline rather than a simple shortcut. The launcher is responsible for making the environment consistent before the process begins.</p>
+                        <div class="code">public static bool Launch(string? protocol = null) { try { string? liveHash = TryGetLiveHash(); var found = FindInstalledPlayer(liveHash); if (found == null) return false; var ensured = EnsureRobloxInAppData(found.Value.exe, found.Value.dir, liveHash); if (ensured == null) return false; string? uri = NormalizeRobloxPlayerUri(protocol); return StartRoblox(ensured.Value.exe, ensured.Value.dir, uri); } catch { return false; } }</div>
+                        <div class="code">private static bool StartRoblox(string exePath, string workingDir, string? uri) { var psi = new ProcessStartInfo { FileName = exePath, WorkingDirectory = workingDir, UseShellExecute = true }; if (!string.IsNullOrWhiteSpace(uri)) psi.Arguments = `"${uri}"`; else psi.Arguments = "--app"; try { return Process.Start(psi) != null; } catch { return false; } }</div>
                     </section>
 
                     <section class="card" id="executor-support">
                         <h2>Wave Executor Support</h2>
-                        <p>WaveStrap helps the Wave ecosystem by making Roblox startup predictable and stable.</p>
+                        <p>WaveStrap clearly helps the Wave ecosystem by making Roblox startup predictable. Since Roblox updates can change launch behavior, install paths, and version availability, an executor or related tooling benefits from a launcher that stabilizes those details.</p>
+                        <p>WaveStrap helps by handling version-aware launch decisions, routing protocol launches through itself, preparing multi-instance conditions, and allowing downgraded versions to be used when needed. Instead of the rest of the Wave ecosystem depending on Roblox’s default bootstrap path, it can depend on WaveStrap’s controlled startup behavior.</p>
                         <ul>
                             <li>Starts Roblox directly through a managed process path</li>
                             <li>Supports downgraded clients when compatibility matters</li>
@@ -458,7 +468,8 @@
 
                     <section class="card" id="versions">
                         <h2>Version Tracking and Downgrade</h2>
-                        <p>WaveStrap is version-aware in both directions — current live version and past versions for downgrades.</p>
+                        <p>WaveStrap is version-aware in two different directions. It can ask Roblox for the current live WindowsPlayer version, and it can also query external APIs for past versions. This is what makes downgrade support possible.</p>
+                        <p>The <b>LiveVersionTracker</b> fetches the active LIVE version from Roblox’s client settings endpoint. The <b>RddClient</b> and <b>WeaoClient</b> talk to Wave-related services that expose past version information. Together, they allow WaveStrap to identify both the present version state and a target version for downgrade flows.</p>
                         <div class="split">
                             <div class="code">internal static class LiveVersionTracker { ... }</div>
                             <div class="code">internal sealed class RddClient { ... }</div>
@@ -468,26 +479,30 @@
 
                     <section class="card" id="protocols">
                         <h2>Protocol Registration</h2>
-                        <p>Protocol registration makes WaveStrap behave like a true bootstrapper by handling roblox:// and custom wave:// links.</p>
-                        <div class="code">public static void Ensure(bool robloxHookEnabled) { ... }</div>
+                        <p>Protocol registration is one of the features that makes WaveStrap behave like a true bootstrapper. Instead of only being launched manually, it can register itself as the handler for both a custom <b>wave</b> scheme and the <b>roblox-player</b> scheme.</p>
+                        <p>That means browser play actions or direct protocol links can be redirected into WaveStrap first. Once intercepted, WaveStrap decides how to handle the launch, which allows the rest of the environment to stay consistent.</p>
+                        <div class="code">public static void Ensure(bool robloxHookEnabled) { Register(WaveScheme); if (robloxHookEnabled) { if (!IsHookedToThisExe(RobloxScheme)) Register(RobloxScheme); } else { UnregisterHKCU(RobloxScheme); } }</div>
+                        <div class="code">private static void Register(string scheme) { var exe = GetExePath(); using var key = Registry.CurrentUser.CreateSubKey(`Software\Classes\${scheme}`); key.SetValue("", `URL:${scheme} Protocol`); key.SetValue("URL Protocol", ""); using var cmd = key.CreateSubKey("shell\open\command"); cmd.SetValue("", `"${exe}" "%1"`); }</div>
                     </section>
 
                     <section class="card" id="pending">
                         <h2>Pending Launch Handling</h2>
-                        <p>Helper to preserve launch URIs across setup/boot transitions using a local file.</p>
+                        <p>The <b>PendingLaunch</b> helper shows that WaveStrap is designed to preserve launch state when needed. Incoming URIs can be written into a file under LocalAppData, then read back and cleared later. This is useful when a launch request needs to survive a boot or setup transition before it is actually processed.</p>
+                        <p>That might look like a small helper file, but architecturally it is important. It shows that WaveStrap supports launch orchestration, not just immediate execution.</p>
                         <div class="code">public static class PendingLaunch { ... }</div>
                     </section>
 
                     <section class="card" id="repair">
                         <h2>Install and Repair Services</h2>
-                        <p>InstallService provides real recovery capability — downloads official installer, waits for version, cleans up, and can force clean installs.</p>
+                        <p><b>InstallService</b> gives WaveStrap real recovery capability. If the correct live version is missing or invalid, WaveStrap downloads the official Roblox installer, launches it, waits for a valid version folder to appear, and then cleans up redundant installer files. It can also force a clean install by removing version folders first.</p>
+                        <p>This means WaveStrap is not passive. It does not just fail when Roblox is broken. It actively repairs the install chain and brings the client back into a usable state.</p>
                         <div class="code">public static async Task&lt;string&gt; EnsureRobloxInstalledAndGetLatestVersionDirAsync(...) { ... }</div>
                     </section>
                 </main>
             </div>
 
             <div class="footer">
-                WaveStrap • Built for the Wave Ecosystem • 2026
+                WaveStrap • Built for the Wave Ecosystem
             </div>
         </div>
     </div>
