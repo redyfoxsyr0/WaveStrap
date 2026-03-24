@@ -1,510 +1,821 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WaveStrap</title>
-    <style>
-        :root {
-            --bg1: #05060a;
-            --bg2: #070b14;
-            --bg3: #050505;
-            --panel: rgba(255,255,255,.04);
-            --line: rgba(255,255,255,.10);
-            --line2: rgba(125,211,252,.22);
-            --text: #fff;
-            --muted: #9ca3af;
-            --muted2: #6b7280;
-            --blue: #7dd3fc;
-            --blue2: #38bdf8;
-            --cardA: #071120;
-            --cardB: #040917;
-            --shadow: 0 25px 60px rgba(0,0,0,.45);
+!DOCTYPE html
+html lang=en
+head
+meta charset=UTF-8
+meta name=viewport content=width=device-width, initial-scale=1.0
+titleWaveStraptitle
+style
+root{
+  --bg1#05060a;
+  --bg2#070b14;
+  --bg3#050505;
+  --panelrgba(255,255,255,.04);
+  --panel2rgba(255,255,255,.03);
+  --linergba(255,255,255,.10);
+  --line2rgba(125,211,252,.22);
+  --line3rgba(125,211,252,.30);
+  --text#fff;
+  --muted#9ca3af;
+  --muted2#6b7280;
+  --blue#7dd3fc;
+  --blue2#38bdf8;
+  --purple#a78bfa;
+  --cardA#071120;
+  --cardB#040917;
+  --shadow0 30px 70px rgba(0,0,0,.45);
+}
+
+{box-sizingborder-box}
+html{scroll-behaviorsmooth}
+
+body{
+  margin0;
+  font-familySegoe UI,Arial,sans-serif;
+  colorvar(--text);
+  background
+    radial-gradient(circle at 10% 10%, rgba(125,211,252,.18), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(96,165,250,.14), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(167,139,250,.10), transparent 34%),
+    linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+  min-height100vh;
+  overflow-xhidden;
+}
+
+.page{
+  widthmin(1240px,95%);
+  margin0 auto;
+  padding28px 0 48px;
+}
+
+.shell{
+  positionrelative;
+  overflowhidden;
+  border1px solid var(--line);
+  border-radius24px;
+  backgroundlinear-gradient(145deg,rgba(255,255,255,.04),rgba(0,0,0,.28));
+  box-shadowvar(--shadow);
+}
+
+.ambient{
+  positionabsolute;
+  inset0;
+  pointer-eventsnone;
+  overflowhidden;
+}
+
+.orb{
+  positionabsolute;
+  border-radius999px;
+  opacity.16;
+  animationorbFloat 14s ease-in-out infinite alternate;
+}
+
+.orb.one{
+  width420px;
+  height420px;
+  left-80px;
+  top-120px;
+  backgroundradial-gradient(circle, rgba(125,211,252,.42) 0%, rgba(56,189,248,.10) 40%, transparent 72%);
+}
+
+.orb.two{
+  width460px;
+  height460px;
+  right-140px;
+  top0;
+  backgroundradial-gradient(circle, rgba(96,165,250,.30) 0%, rgba(76,29,149,.10) 40%, transparent 74%);
+  animation-duration17s;
+}
+
+.orb.three{
+  width340px;
+  height340px;
+  left20%;
+  bottom-120px;
+  backgroundradial-gradient(circle, rgba(167,139,250,.22) 0%, rgba(167,139,250,.08) 36%, transparent 72%);
+  animation-duration13s;
+}
+
+.topbar{
+  positionrelative;
+  z-index2;
+  padding30px 28px 6px;
+}
+
+.title{
+  margin0;
+  font-size30px;
+  font-weight700;
+  letter-spacing-.03em;
+}
+
+.subtitle{
+  margin10px 0 0;
+  colorvar(--muted);
+  font-size15px;
+}
+
+.layout{
+  positionrelative;
+  z-index2;
+  displaygrid;
+  grid-template-columns280px 1fr;
+  min-height820px;
+}
+
+.sidebar{
+  padding24px 18px 24px 24px;
+  border-right1px solid var(--line);
+  backgroundlinear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+}
+
+.sidebar-inner{
+  positionsticky;
+  top24px;
+}
+
+.logo-wrap{
+  displayflex;
+  align-itemscenter;
+  gap14px;
+  margin-bottom18px;
+}
+
+.logo{
+  width66px;
+  height66px;
+  border-radius18px;
+  background#0e0f14;
+  border1px solid rgba(255,255,255,.1);
+  displayflex;
+  align-itemscenter;
+  justify-contentcenter;
+  overflowhidden;
+  box-shadow0 10px 24px rgba(0,0,0,.30);
+  animationlogoFloat 6s ease-in-out infinite;
+}
+
+.logo img{
+  width56px;
+  height56px;
+  object-fitcontain;
+}
+
+.brand{
+  font-size20px;
+  font-weight700;
+  letter-spacing-.02em;
+}
+
+.brand-sub{
+  font-size12px;
+  colorvar(--muted);
+  margin-top4px;
+}
+
+.side-title{
+  font-size11px;
+  text-transformuppercase;
+  letter-spacing.12em;
+  colorvar(--muted2);
+  margin22px 0 10px;
+}
+
+.nav{
+  displayflex;
+  flex-directioncolumn;
+  gap8px;
+}
+
+.nav a,.ext-link,.person{
+  displayblock;
+  text-decorationnone;
+  color#dbe7f5;
+  padding11px 12px;
+  border-radius12px;
+  border1px solid rgba(255,255,255,.06);
+  backgroundrgba(255,255,255,.025);
+  transitiontransform .2s ease,border-color .2s ease,background .2s ease;
+}
+
+.nav ahover,.ext-linkhover,.personhover{
+  transformtranslateX(4px);
+  border-colorrgba(56,189,248,.32);
+  backgroundrgba(56,189,248,.08);
+}
+
+.content{
+  padding24px 28px 28px;
+}
+
+.hero-card,.card{
+  backgroundlinear-gradient(135deg,var(--cardA),var(--cardB));
+  border1px solid var(--line2);
+  border-radius22px;
+  padding24px;
+  box-shadowinset 0 1px 0 rgba(255,255,255,.02);
+}
+
+.hero-card{
+  margin-bottom24px;
+  animationcardDrift1 7s ease-in-out infinite;
+}
+
+.card{
+  margin-bottom24px;
+  animationcardDrift2 9s ease-in-out infinite;
+}
+
+.cardnth-of-type(2n){
+  animationcardDrift3 11s ease-in-out infinite;
+}
+
+.hero-grid{
+  displaygrid;
+  grid-template-columns1.2fr .8fr;
+  gap18px;
+}
+
+.hero-stat{
+  padding16px 18px;
+  border-radius16px;
+  border1px solid rgba(255,255,255,.08);
+  backgroundrgba(255,255,255,.02);
+}
+
+.hero-stat b{
+  displayblock;
+  font-size14px;
+  margin-bottom6px;
+}
+
+.hero-stat span{
+  colorvar(--muted);
+  font-size13px;
+  line-height1.6;
+}
+
+.card h2,.hero-card h2{
+  margin0 0 16px;
+  font-size20px;
+  font-weight700;
+}
+
+.card p,.hero-card p{
+  margin0 0 16px;
+  line-height1.8;
+  color#e5eef9;
+  font-size14px;
+}
+
+.card ul{
+  margin0;
+  padding-left18px;
+  color#e5eef9;
+}
+
+.card li{
+  margin0 0 10px;
+  line-height1.7;
+}
+
+.code{
+  margin-top14px;
+  background#020617;
+  border1px solid rgba(255,255,255,.05);
+  border-radius14px;
+  padding14px;
+  overflowauto;
+  colorvar(--blue);
+  font-familyConsolas,monospace;
+  font-size12.5px;
+  line-height1.5;
+  white-spacepre;
+}
+
+.small-code{
+  font-size12px;
+}
+
+.split{
+  displaygrid;
+  grid-template-columns1fr 1fr;
+  gap16px;
+}
+
+.pill-row{
+  displayflex;
+  flex-wrapwrap;
+  gap10px;
+  margin-top10px;
+}
+
+.pill{
+  padding8px 12px;
+  border-radius999px;
+  backgroundrgba(56,189,248,.10);
+  border1px solid rgba(56,189,248,.22);
+  colorvar(--blue);
+  font-size12px;
+}
+
+.footer{
+  padding0 28px 28px;
+  colorvar(--muted2);
+  font-size12px;
+}
+
+@keyframes orbFloat{
+  from{transformtranslate3d(0,0,0) scale(1)}
+  to{transformtranslate3d(30px,18px,0) scale(1.06)}
+}
+
+@keyframes logoFloat{
+  0%,100%{transformtranslateY(0)}
+  50%{transformtranslateY(-6px)}
+}
+
+@keyframes cardDrift1{
+  0%,100%{transformtranslateY(0)}
+  50%{transformtranslateY(-4px)}
+}
+
+@keyframes cardDrift2{
+  0%,100%{transformtranslateY(0) translateX(0)}
+  50%{transformtranslateY(-5px) translateX(2px)}
+}
+
+@keyframes cardDrift3{
+  0%,100%{transformtranslateY(0) translateX(0)}
+  50%{transformtranslateY(-3px) translateX(-2px)}
+}
+
+@media (max-width980px){
+  .layout{grid-template-columns1fr}
+  .sidebar{
+    border-rightnone;
+    border-bottom1px solid var(--line);
+  }
+  .sidebar-inner{positionstatic}
+  .hero-grid,.split{grid-template-columns1fr}
+}
+style
+head
+body
+div class=page
+  div class=shell
+    div class=ambient
+      div class=orb onediv
+      div class=orb twodiv
+      div class=orb threediv
+    div
+
+    div class=topbar
+      h1 class=titleWaveStraph1
+      p class=subtitleRoblox launch manager for the Wave ecosystemp
+    div
+
+    div class=layout
+      aside class=sidebar
+        div class=sidebar-inner
+           div class=logo-wrap
+              div class=logoimg src=httpsraw.githubusercontent.comredyfoxsyr0WaveStrapmainWave.png alt=WaveStrap Logodiv
+                div
+                div class=brandWaveStrapdiv
+                div class=brand-subProject navigationdiv
+              div
+            div
+
+          div class=side-titleTopicsdiv
+          nav class=nav
+            a href=#overviewOverviewa
+            a href=#architectureProject Architecturea
+            a href=#setup-windowSetup Experiencea
+            a href=#launch-flowLaunch Pipelinea
+            a href=#executor-supportWave Executor Supporta
+            a href=#versionsVersion Tracking and Downgradea
+            a href=#protocolsProtocol Registrationa
+            a href=#pendingPending Launch Handlinga
+            a href=#repairInstall and Repair Servicesa
+          nav
+
+          div class=side-titleCreators & Devsdiv
+          div class=personRedFoxdiv
+          div class=person style=margin-top8px;psyvordiv
+
+          div class=side-titleShortcutsdiv
+            a class=ext-link href=#overviewStart Readinga
+            a class=ext-link href=#launch-flowLaunch Flowa
+            a class=ext-link href=#protocolsProtocol Hooksa
+            a class=ext-link href=httpsgithub.comredyfoxsyr0WaveStrapreleasesdownloadGetWaveStrapWaveStrap.zip target=_blank rel=noopener noreferrerDownload WaveStrapa
+            a class=ext-link href=httpsdiscord.cominvite6zSphHQXcF target=_blank rel=noopener noreferrerJoin Discorda
+        div
+      aside
+
+      main class=content
+        section class=hero-card id=overview
+          h2Overviewh2
+          p
+            WaveStrap is a custom Roblox bootstrapper and runtime controller built around a specific goal take control of how Roblox is installed, where it is launched from, how launch requests are intercepted, and how the Wave environment stays stable across normal launches, downgraded launches, browser protocol launches, and repair flows.
+          p
+          p
+            Based on the structure of the project, WaveStrap is not just a simple launcher window. It is a full launch pipeline made up of setup, configuration, protocol registration, live version tracking, downgrade sourcing, pending URI handling, installation verification, and controlled execution. The app is split into UI windows such as bSetupWindowb, bBootWindowb, bHomeWindowb, and bDowngradeWindowb, with service classes that manage the system side of the workflow.
+          p
+          div class=hero-grid
+            div class=hero-statbWhat it managesbspanRoblox install discovery, launch routing, downgrade handling, protocol association, runtime preparation, and recovery tools.spandiv
+            div class=hero-statbWhy it existsbspanTo provide a predictable Wave-centered environment instead of depending on Roblox browser bootstrap behavior alone.spandiv
+          div
+          div class=pill-row
+            span class=pillWPF Frontendspan
+            span class=pillCustom Protocol Hooksspan
+            span class=pillDowngrade Awarespan
+            span class=pillMulti-Instance Prepspan
+            span class=pillRepair Workflowspan
+          div
+        section
+
+        section class=card id=architecture
+          h2Project Architectureh2
+          p
+            The project layout shows that WaveStrap is organized into separate windows and service layers instead of pushing all behavior into one file. That matters because the app is clearly trying to behave like a real desktop bootstrapper with dedicated responsibilities.
+          p
+          p
+            The core structure looks like this UI windows handle user interaction, service classes handle install and launch logic, API clients fetch version information, and helper classes persist state or register protocol handlers. The updater project exists separately, which suggests the main application and update flow are intentionally isolated.
+          p
+          div class=split
+            div class=code small-codeWave-Strap
+├── SetupWindow.xaml
+├── HomeWindow.xaml
+├── DowngradeWindow.xaml
+├── BootWindow.xaml
+├── ConfigService.cs
+├── InstallService.cs
+├── LaunchService.cs
+├── LiveVersionTracker.cs
+├── ProtocolRegistration.cs
+├── PendingLaunch.cs
+├── RddClient.cs
+├── WeaoClient.cs
+└── WaveStrap.Updaterdiv
+            div class=code small-codeUI Layer
+- Setup and navigation windows
+- User-facing actions and status
+
+Service Layer
+- Install verification
+- Launch routing
+- Version detection
+- Protocol mapping
+
+Remote Layer
+- Current live version lookup
+- Previous version lookup
+- Downgrade metadatadiv
+          div
+        section
+
+        section class=card id=setup-window
+          h2Setup Experienceh2
+          p
+            The bSetupWindowb is the first-run configuration experience. It establishes where WaveStrap should store its client data and whether the application should register itself as the handler for Roblox launch requests. That makes it the first place where WaveStrap turns from a normal desktop app into a launch controller.
+          p
+          p
+            The UI itself matches the rest of the project dark gradients, rounded chrome, custom title controls, and soft glass panels. More importantly, the code-behind shows what setup actually does. It writes a bWaveConfigb, persists the selected install path, optionally enables protocol registration, and then moves directly into the main launcher window.
+          p
+          div class=code&lt;Window
+    xClass=WaveStrap.SetupWindow
+    Title=WaveStrap Setup
+    Width=540
+    Height=420
+    WindowStyle=None
+    AllowsTransparency=True&gt;
+
+    &lt;TextBox xName=PathBox &gt;
+    &lt;CheckBox xName=ProtocolBox
+              Content=Set WaveStrap as roblox handler
+              IsChecked=True &gt;
+
+    &lt;Button Content=Save &amp; Continue
+            Click=Save_Click &gt;
+&lt;Window&gt;div
+          div class=codeprivate void Save_Click(object sender, RoutedEventArgs e)
+{
+    var cfg = new WaveConfig
+    {
+        InstallPath = PathBox.Text.Trim()  ,
+        Channel = production,
+        RegisterProtocol = ProtocolBox.IsChecked == true
+    };
+
+    if (string.IsNullOrWhiteSpace(cfg.InstallPath))
+    {
+        cfg.InstallPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            WaveStrap,
+            Client
+        );
+    }
+
+    ConfigService.Save(cfg);
+
+    if (cfg.RegisterProtocol)
+        ProtocolRegistration.Ensure(robloxHookEnabled true);
+
+    var home = new HomeWindow();
+    home.Show();
+    Close();
+}div
+        section
+
+        section class=card id=launch-flow
+          h2Launch Pipelineh2
+          p
+            The shared bLaunchServiceb is one of the most important parts of WaveStrap. It does not assume Roblox is already in the right place. It checks for the live version, searches across possible install roots, can restore Roblox into the expected AppData versions tree, normalizes protocol input, and only then starts the player executable.
+          p
+          p
+            That means WaveStrap is acting as a controlled launch pipeline rather than a simple shortcut. The launcher is responsible for making the environment consistent before the process begins.
+          p
+          div class=codepublic static bool Launch(string protocol = null)
+{
+    try
+    {
+        string liveHash = TryGetLiveHash();
+        var found = FindInstalledPlayer(liveHash);
+        if (found == null)
+            return false;
+
+        var ensured = EnsureRobloxInAppData(found.Value.exe, found.Value.dir, liveHash);
+        if (ensured == null)
+            return false;
+
+        string uri = NormalizeRobloxPlayerUri(protocol);
+        return StartRoblox(ensured.Value.exe, ensured.Value.dir, uri);
+    }
+    catch
+    {
+        return false;
+    }
+}div
+          div class=codeprivate static bool StartRoblox(string exePath, string workingDir, string uri)
+{
+    var psi = new ProcessStartInfo
+    {
+        FileName = exePath,
+        WorkingDirectory = workingDir,
+        UseShellExecute = true
+    };
+
+    if (!string.IsNullOrWhiteSpace(uri))
+        psi.Arguments = ${uri};
+    else
+        psi.Arguments = --app;
+
+    try
+    {
+        return Process.Start(psi) != null;
+    }
+    catch
+    {
+        return false;
+    }
+}div
+        section
+
+        section class=card id=executor-support
+          h2Wave Executor Supporth2
+          p
+            WaveStrap clearly helps the Wave ecosystem by making Roblox startup predictable. Since Roblox updates can change launch behavior, install paths, and version availability, an executor or related tooling benefits from a launcher that stabilizes those details.
+          p
+          p
+            WaveStrap helps by handling version-aware launch decisions, routing protocol launches through itself, preparing multi-instance conditions, and allowing downgraded versions to be used when needed. Instead of the rest of the Wave ecosystem depending on Roblox’s default bootstrap path, it can depend on WaveStrap’s controlled startup behavior.
+          p
+          ul
+            liStarts Roblox directly through a managed process pathli
+            liSupports downgraded clients when compatibility mattersli
+            liAllows launch requests to be intercepted through protocol hooksli
+            liPrepares multi-instance state before launchli
+            liCan recover broken or missing installs automaticallyli
+          ul
+        section
+
+        section class=card id=versions
+          h2Version Tracking and Downgradeh2
+          p
+            WaveStrap is version-aware in two different directions. It can ask Roblox for the current live WindowsPlayer version, and it can also query external APIs for past versions. This is what makes downgrade support possible.
+          p
+          p
+            The bLiveVersionTrackerb fetches the active LIVE version from Roblox’s client settings endpoint. The bRddClientb and bWeaoClientb talk to Wave-related services that expose past version information. Together, they allow WaveStrap to identify both the present version state and a target version for downgrade flows.
+          p
+          div class=split
+            div class=codeinternal static class LiveVersionTracker
+{
+    private static readonly HttpClient _http = new HttpClient
+    {
+        Timeout = TimeSpan.FromSeconds(15)
+    };
+
+    public static async Task&lt;string&gt; GetCurrentLiveAsync()
+    {
+        try
+        {
+            var json = await _http.GetStringAsync(
+                httpsclientsettingscdn.roblox.comv2client-versionWindowsPlayerchannelLIVE
+            );
+
+            using var doc = JsonDocument.Parse(json);
+            return doc.RootElement.GetProperty(clientVersionUpload).GetString()  ;
         }
-
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            margin: 0;
-            font-family: Segoe UI, Arial, sans-serif;
-            color: var(--text);
-            background: radial-gradient(circle at 10% 10%, rgba(125,211,252,.18), transparent 40%),
-                        radial-gradient(circle at 80% 20%, rgba(96,165,250,.14), transparent 40%),
-                        radial-gradient(circle at 20% 80%, rgba(167,139,250,.10), transparent 34%),
-                        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
-            min-height: 100vh;
-            overflow-x: hidden;
+        catch
+        {
+            return ;
         }
+    }
+}div
 
-        .page {
-            width: min(1240px, 95%);
-            margin: 0 auto;
-            padding: 20px 0 40px;
+            div class=codeinternal sealed class RddClient
+{
+    private static readonly string[] ApiDomains =
+    {
+        httpsweao.xyzapistatusexploitswave
+    };
+
+    public async Task&lt;string&gt; GetWindowsPastVersionAsync()
+    {
+        var json = await _http.GetStringAsync(ApiDomains[0]);
+        using var doc = JsonDocument.Parse(json);
+
+        if (!doc.RootElement.TryGetProperty(rbxversion, out var rbx))
+            throw new Exception(API did not return rbxversion.);
+
+        return rbx.GetString()!;
+    }
+
+    public string BuildRddDownloadUrl(string version)
+    {
+        return $httpsrdd.weao.ggchannel=LIVE&binaryType=WindowsPlayer&version={version};
+    }
+}div
+          div
+          div class=codeinternal static class WeaoClient
+{
+    public static async Task&lt;string&gt; GetPreviousLiveWindowsPlayerAsync()
+    {
+        const string url = httpsweao.xyzapiversionspast;
+        using var req = new HttpRequestMessage(HttpMethod.Get, url);
+        req.Headers.UserAgent.ParseAdd(WaveStrap1.0);
+
+        using var res = await _http.SendAsync(req);
+        res.EnsureSuccessStatusCode();
+
+        var json = await res.Content.ReadAsStringAsync();
+        var match = Regex.Match(json, @version-[a-f0-9]{16,}, RegexOptions.IgnoreCase);
+
+        if (!match.Success)
+            throw new Exception(Could not extract Roblox version hash from weao response.);
+
+        return match.Value;
+    }
+}div
+        section
+
+        section class=card id=protocols
+          h2Protocol Registrationh2
+          p
+            Protocol registration is one of the features that makes WaveStrap behave like a true bootstrapper. Instead of only being launched manually, it can register itself as the handler for both a custom bwaveb scheme and the broblox-playerb scheme.
+          p
+          p
+            That means browser play actions or direct protocol links can be redirected into WaveStrap first. Once intercepted, WaveStrap decides how to handle the launch, which allows the rest of the environment to stay consistent.
+          p
+          div class=codepublic static void Ensure(bool robloxHookEnabled)
+{
+    Register(WaveScheme);
+
+    if (robloxHookEnabled)
+    {
+        if (!IsHookedToThisExe(RobloxScheme))
+            Register(RobloxScheme);
+    }
+    else
+    {
+        UnregisterHKCU(RobloxScheme);
+    }
+}div
+          div class=codeprivate static void Register(string scheme)
+{
+    var exe = GetExePath();
+
+    using var key = Registry.CurrentUser.CreateSubKey($@SoftwareClasses{scheme});
+    key.SetValue(, $URL{scheme} Protocol);
+    key.SetValue(URL Protocol, );
+
+    using var cmd = key.CreateSubKey(@shellopencommand);
+    cmd.SetValue(, ${exe} %1);
+}div
+        section
+
+        section class=card id=pending
+          h2Pending Launch Handlingh2
+          p
+            The bPendingLaunchb helper shows that WaveStrap is designed to preserve launch state when needed. Incoming URIs can be written into a file under LocalAppData, then read back and cleared later. This is useful when a launch request needs to survive a boot or setup transition before it is actually processed.
+          p
+          p
+            That might look like a small helper file, but architecturally it is important. It shows that WaveStrap supports launch orchestration, not just immediate execution.
+          p
+          div class=codepublic static class PendingLaunch
+{
+    private static string DataDir =
+        Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            WaveStrap,
+            Data
+        );
+
+    public static string PendingPath = Path.Combine(DataDir, pending_uri.txt);
+
+    public static void Write(string uri)
+    {
+        Directory.CreateDirectory(DataDir);
+        File.WriteAllText(PendingPath, uri);
+    }
+
+    public static string ReadAndClear()
+    {
+        try
+        {
+            if (!File.Exists(PendingPath)) return null;
+
+            var uri = File.ReadAllText(PendingPath).Trim();
+            File.Delete(PendingPath);
+
+            return string.IsNullOrWhiteSpace(uri)  null  uri;
         }
-
-        .shell {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: 24px;
-            background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(0,0,0,.28));
-            box-shadow: var(--shadow);
+        catch
+        {
+            return null;
         }
+    }
+}div
+        section
 
-        .ambient {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
+        section class=card id=repair
+          h2Install and Repair Servicesh2
+          p
+            bInstallServiceb gives WaveStrap real recovery capability. If the correct live version is missing or invalid, WaveStrap downloads the official Roblox installer, launches it, waits for a valid version folder to appear, and then cleans up redundant installer files. It can also force a clean install by removing version folders first.
+          p
+          p
+            This means WaveStrap is not passive. It does not just fail when Roblox is broken. It actively repairs the install chain and brings the client back into a usable state.
+          p
+          div class=codepublic static async Task&lt;string&gt; EnsureRobloxInstalledAndGetLatestVersionDirAsync(Action&lt;string&gt; log = null)
+{
+    log = _ = { };
 
-        .orb {
-            position: absolute;
-            border-radius: 999px;
-            opacity: .16;
-            animation: orbFloat 14s ease-in-out infinite alternate;
-        }
+    string liveHash = await LiveVersionTracker.GetCurrentLiveAsync();
+    string targetDir = Path.Combine(LocalRobloxVersions, liveHash);
 
-        .orb.one {
-            width: 420px; height: 420px;
-            left: -80px; top: -120px;
-            background: radial-gradient(circle, rgba(125,211,252,.42) 0%, rgba(56,189,248,.10) 40%, transparent 72%);
-        }
+    if (!Directory.Exists(targetDir)  !IsValidRobloxVersionFolder(new DirectoryInfo(targetDir)))
+    {
+        log(Correct version not found. Launching official installer...);
 
-        .orb.two {
-            width: 460px; height: 460px;
-            right: -140px; top: 0;
-            background: radial-gradient(circle, rgba(96,165,250,.30) 0%, rgba(76,29,149,.10) 40%, transparent 74%);
-            animation-duration: 17s;
-        }
+        var installerPath = Path.Combine(Path.GetTempPath(), RobloxPlayerInstaller.exe);
 
-        .orb.three {
-            width: 340px; height: 340px;
-            left: 20%; bottom: -120px;
-            background: radial-gradient(circle, rgba(167,139,250,.22) 0%, rgba(167,139,250,.08) 36%, transparent 72%);
-            animation-duration: 13s;
-        }
+        await DownloadFileAsync(httpswww.roblox.comdownloadclientos=win, installerPath, log);
 
-        .topbar {
-            position: relative;
-            z-index: 2;
-            padding: 28px 24px 10px;
-        }
+        var process = Process.Start(new ProcessStartInfo
+        {
+            FileName = installerPath,
+            UseShellExecute = true
+        });
 
-        .title {
-            margin: 0;
-            font-size: 30px;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
+        if (process != null)
+            await process.WaitForExitAsync();
 
-        .subtitle {
-            margin: 10px 0 0;
-            color: var(--muted);
-            font-size: 15px;
-        }
+        CleanupAllInstallers();
 
-        .layout {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 820px;
-        }
+        return (await WaitForLatestValidVersionAsync(TimeSpan.FromMinutes(8), log)).FullName;
+    }
 
-        .sidebar {
-            padding: 24px 18px 24px 24px;
-            border-right: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-        }
+    return targetDir;
+}div
+          div class=codepublic static async Task ForceCleanInstallAsync()
+{
+    foreach (var p in Process.GetProcessesByName(RobloxPlayerBeta))
+        try { p.Kill(); } catch { }
 
-        .sidebar-inner {
-            position: sticky;
-            top: 24px;
-        }
+    if (Directory.Exists(LocalRobloxVersions))
+    {
+        foreach (var dir in Directory.GetDirectories(LocalRobloxVersions, version-))
+            try { Directory.Delete(dir, true); } catch { }
+    }
 
-        .logo-wrap {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 18px;
-        }
+    await EnsureRobloxInstalledAndGetLatestVersionDirAsync();
+}div
+        section
+      main
+    div
 
-        .logo {
-            width: 66px;
-            height: 66px;
-            border-radius: 18px;
-            background: #0e0f14;
-            border: 1px solid rgba(255,255,255,.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: 0 10px 24px rgba(0,0,0,.30);
-            animation: logoFloat 6s ease-in-out infinite;
-        }
-
-        .logo img {
-            width: 56px;
-            height: 56px;
-            object-fit: contain;
-        }
-
-        .brand {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .brand-sub {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 4px;
-        }
-
-        .side-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: .12em;
-            color: var(--muted2);
-            margin: 22px 0 10px;
-        }
-
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .nav a, .ext-link, .person {
-            display: block;
-            text-decoration: none;
-            color: #dbe7f5;
-            padding: 11px 12px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,.06);
-            background: rgba(255,255,255,.025);
-            transition: transform .2s ease, border-color .2s ease, background .2s ease;
-        }
-
-        .nav a:hover, .ext-link:hover, .person:hover {
-            transform: translateX(4px);
-            border-color: rgba(56,189,248,.32);
-            background: rgba(56,189,248,.08);
-        }
-
-        .content {
-            padding: 24px 26px 28px;
-        }
-
-        .hero-card, .card {
-            background: linear-gradient(135deg, var(--cardA), var(--cardB));
-            border: 1px solid var(--line2);
-            border-radius: 22px;
-            padding: 24px;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
-        }
-
-        .hero-card {
-            margin-bottom: 24px;
-            animation: cardDrift1 7s ease-in-out infinite;
-        }
-
-        .card {
-            margin-bottom: 24px;
-            animation: cardDrift2 9s ease-in-out infinite;
-        }
-
-        .card:nth-of-type(2n) {
-            animation: cardDrift3 11s ease-in-out infinite;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr .8fr;
-            gap: 18px;
-        }
-
-        .hero-stat {
-            padding: 16px 18px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,.08);
-            background: rgba(255,255,255,.02);
-        }
-
-        .hero-stat b {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
-
-        .hero-stat span {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .card h2, .hero-card h2 {
-            margin: 0 0 16px;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        .card p, .hero-card p {
-            margin: 0 0 16px;
-            line-height: 1.8;
-            color: #e5eef9;
-            font-size: 14px;
-        }
-
-        .card ul {
-            margin: 0;
-            padding-left: 18px;
-            color: #e5eef9;
-        }
-
-        .card li {
-            margin: 0 0 10px;
-            line-height: 1.7;
-        }
-
-        .code {
-            margin-top: 14px;
-            background: #020617;
-            border: 1px solid rgba(255,255,255,.05);
-            border-radius: 14px;
-            padding: 14px;
-            overflow: auto;
-            color: var(--blue);
-            font-family: Consolas, monospace;
-            font-size: 12.5px;
-            line-height: 1.5;
-            white-space: pre;
-        }
-
-        .split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .pill-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .pill {
-            padding: 8px 12px;
-            border-radius: 999px;
-            background: rgba(56,189,248,.10);
-            border: 1px solid rgba(56,189,248,.22);
-            color: var(--blue);
-            font-size: 12px;
-        }
-
-        .footer {
-            padding: 0 28px 28px;
-            color: var(--muted2);
-            font-size: 12px;
-            text-align: center;
-        }
-
-        /* Original Animations */
-        @keyframes orbFloat {
-            from { transform: translate3d(0,0,0) scale(1); }
-            to { transform: translate3d(30px,18px,0) scale(1.06); }
-        }
-
-        @keyframes logoFloat {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @keyframes cardDrift1 {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-        }
-
-        @keyframes cardDrift2 {
-            0%,100% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-5px) translateX(2px); }
-        }
-
-        @keyframes cardDrift3 {
-            0%,100% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-3px) translateX(-2px); }
-        }
-
-        /* Mobile Support */
-        @media (max-width: 980px) {
-            .layout { grid-template-columns: 1fr; }
-            .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
-            .sidebar-inner { position: static; }
-            .hero-grid, .split { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 640px) {
-            .page { padding: 12px 0 32px; }
-            .shell { border-radius: 18px; margin: 0 8px; }
-            .topbar, .content { padding-left: 18px; padding-right: 18px; }
-            .title { font-size: 26px; }
-            .hero-card, .card { padding: 20px; }
-            .code { font-size: 12px; padding: 12px; }
-            .logo { width: 58px; height: 58px; }
-            .logo img { width: 50px; height: 50px; }
-        }
-    </style>
-</head>
-<body>
-    <div class="page">
-        <div class="shell">
-            <div class="ambient">
-                <div class="orb one"></div>
-                <div class="orb two"></div>
-                <div class="orb three"></div>
-            </div>
-
-            <div class="topbar">
-                <h1 class="title">WaveStrap</h1>
-                <p class="subtitle">Roblox launch manager for the Wave ecosystem</p>
-            </div>
-
-            <div class="layout">
-                <aside class="sidebar">
-                    <div class="sidebar-inner">
-                        <div class="logo-wrap">
-                            <div class="logo"><img src="https://raw.githubusercontent.com/redyfoxsyr0/WaveStrap/main/Wave.png" alt="WaveStrap Logo"></div>
-                            <div>
-                                <div class="brand">WaveStrap</div>
-                                <div class="brand-sub">Project navigation</div>
-                            </div>
-                        </div>
-
-                        <div class="side-title">Topics</div>
-                        <nav class="nav">
-                            <a href="#overview">Overview</a>
-                            <a href="#architecture">Project Architecture</a>
-                            <a href="#setup-window">Setup Experience</a>
-                            <a href="#launch-flow">Launch Pipeline</a>
-                            <a href="#executor-support">Wave Executor Support</a>
-                            <a href="#versions">Version Tracking and Downgrade</a>
-                            <a href="#protocols">Protocol Registration</a>
-                            <a href="#pending">Pending Launch Handling</a>
-                            <a href="#repair">Install and Repair Services</a>
-                        </nav>
-
-                        <div class="side-title">Creators & Devs</div>
-                        <div class="person">RedFox</div>
-                        <div class="person" style="margin-top:8px;">psyvor</div>
-
-                        <div class="side-title">Shortcuts</div>
-                        <a class="ext-link" href="#overview">Start Reading</a>
-                        <a class="ext-link" href="#launch-flow">Launch Flow</a>
-                        <a class="ext-link" href="#protocols">Protocol Hooks</a>
-                        <a class="ext-link" href="https://github.com/redyfoxsyr0/WaveStrap/releases/download/GetWaveStrap/WaveStrap.zip" target="_blank" rel="noopener noreferrer">Download WaveStrap</a>
-                        <a class="ext-link" href="https://discord.com/invite/6zSphHQXcF" target="_blank" rel="noopener noreferrer">Join Discord</a>
-                    </div>
-                </aside>
-
-                <main class="content">
-                    <section class="hero-card" id="overview">
-                        <h2>Overview</h2>
-                        <p>WaveStrap is a custom Roblox bootstrapper and runtime controller built around a specific goal: take control of how Roblox is installed, where it is launched from, how launch requests are intercepted, and how the Wave environment stays stable across normal launches, downgraded launches, browser protocol launches, and repair flows.</p>
-                        <p>Based on the structure of the project, WaveStrap is not just a simple launcher window. It is a full launch pipeline made up of setup, configuration, protocol registration, live version tracking, downgrade sourcing, pending URI handling, installation verification, and controlled execution. The app is split into UI windows such as <b>SetupWindow</b>, <b>BootWindow</b>, <b>HomeWindow</b>, and <b>DowngradeWindow</b>, with service classes that manage the system side of the workflow.</p>
-                        <div class="hero-grid">
-                            <div class="hero-stat"><b>What it manages</b><span>Roblox install discovery, launch routing, downgrade handling, protocol association, runtime preparation, and recovery tools.</span></div>
-                            <div class="hero-stat"><b>Why it exists</b><span>To provide a predictable Wave-centered environment instead of depending on Roblox browser bootstrap behavior alone.</span></div>
-                        </div>
-                        <div class="pill-row">
-                            <span class="pill">WPF Frontend</span>
-                            <span class="pill">Custom Protocol Hooks</span>
-                            <span class="pill">Downgrade Aware</span>
-                            <span class="pill">Multi-Instance Prep</span>
-                            <span class="pill">Repair Workflow</span>
-                        </div>
-                    </section>
-
-                    <section class="card" id="architecture">
-                        <h2>Project Architecture</h2>
-                        <p>The project layout shows that WaveStrap is organized into separate windows and service layers instead of pushing all behavior into one file. That matters because the app is clearly trying to behave like a real desktop bootstrapper with dedicated responsibilities.</p>
-                        <p>The core structure looks like this: UI windows handle user interaction, service classes handle install and launch logic, API clients fetch version information, and helper classes persist state or register protocol handlers. The updater project exists separately, which suggests the main application and update flow are intentionally isolated.</p>
-                        <div class="split">
-                            <div class="code small-code">Wave-Strap ├── SetupWindow.xaml ├── HomeWindow.xaml ├── DowngradeWindow.xaml ├── BootWindow.xaml ├── ConfigService.cs ├── InstallService.cs ├── LaunchService.cs ├── LiveVersionTracker.cs ├── ProtocolRegistration.cs ├── PendingLaunch.cs ├── RddClient.cs ├── WeaoClient.cs └── WaveStrap.Updater</div>
-                            <div class="code small-code">UI Layer - Setup and navigation windows - User-facing actions and status Service Layer - Install verification - Launch routing - Version detection - Protocol mapping Remote Layer - Current live version lookup - Previous version lookup - Downgrade metadata</div>
-                        </div>
-                    </section>
-
-                    <section class="card" id="setup-window">
-                        <h2>Setup Experience</h2>
-                        <p>The <b>SetupWindow</b> is the first-run configuration experience. It establishes where WaveStrap should store its client data and whether the application should register itself as the handler for Roblox launch requests. That makes it the first place where WaveStrap turns from a normal desktop app into a launch controller.</p>
-                        <p>The UI itself matches the rest of the project: dark gradients, rounded chrome, custom title controls, and soft glass panels. More importantly, the code-behind shows what setup actually does. It writes a <b>WaveConfig</b>, persists the selected install path, optionally enables protocol registration, and then moves directly into the main launcher window.</p>
-                        <div class="code">&lt;Window x:Class="WaveStrap.SetupWindow" Title="WaveStrap Setup" Width="540" Height="420" WindowStyle="None" AllowsTransparency="True"&gt; &lt;TextBox x:Name="PathBox" /&gt; &lt;CheckBox x:Name="ProtocolBox" Content="Set WaveStrap as roblox:// handler" IsChecked="True" /&gt; &lt;Button Content="Save &amp; Continue" Click="Save_Click" /&gt; &lt;/Window&gt;</div>
-                        <div class="code">private void Save_Click(object sender, RoutedEventArgs e) { var cfg = new WaveConfig { InstallPath = PathBox.Text?.Trim() ?? "", Channel = "production", RegisterProtocol = ProtocolBox.IsChecked == true }; if (string.IsNullOrWhiteSpace(cfg.InstallPath)) { cfg.InstallPath = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WaveStrap", "Client" ); } ConfigService.Save(cfg); if (cfg.RegisterProtocol) ProtocolRegistration.Ensure(robloxHookEnabled: true); var home = new HomeWindow(); home.Show(); Close(); }</div>
-                    </section>
-
-                    <section class="card" id="launch-flow">
-                        <h2>Launch Pipeline</h2>
-                        <p>The shared <b>LaunchService</b> is one of the most important parts of WaveStrap. It does not assume Roblox is already in the right place. It checks for the live version, searches across possible install roots, can restore Roblox into the expected AppData versions tree, normalizes protocol input, and only then starts the player executable.</p>
-                        <p>That means WaveStrap is acting as a controlled launch pipeline rather than a simple shortcut. The launcher is responsible for making the environment consistent before the process begins.</p>
-                        <div class="code">public static bool Launch(string? protocol = null) { try { string? liveHash = TryGetLiveHash(); var found = FindInstalledPlayer(liveHash); if (found == null) return false; var ensured = EnsureRobloxInAppData(found.Value.exe, found.Value.dir, liveHash); if (ensured == null) return false; string? uri = NormalizeRobloxPlayerUri(protocol); return StartRoblox(ensured.Value.exe, ensured.Value.dir, uri); } catch { return false; } }</div>
-                        <div class="code">private static bool StartRoblox(string exePath, string workingDir, string? uri) { var psi = new ProcessStartInfo { FileName = exePath, WorkingDirectory = workingDir, UseShellExecute = true }; if (!string.IsNullOrWhiteSpace(uri)) psi.Arguments = `"${uri}"`; else psi.Arguments = "--app"; try { return Process.Start(psi) != null; } catch { return false; } }</div>
-                    </section>
-
-                    <section class="card" id="executor-support">
-                        <h2>Wave Executor Support</h2>
-                        <p>WaveStrap clearly helps the Wave ecosystem by making Roblox startup predictable. Since Roblox updates can change launch behavior, install paths, and version availability, an executor or related tooling benefits from a launcher that stabilizes those details.</p>
-                        <p>WaveStrap helps by handling version-aware launch decisions, routing protocol launches through itself, preparing multi-instance conditions, and allowing downgraded versions to be used when needed. Instead of the rest of the Wave ecosystem depending on Roblox’s default bootstrap path, it can depend on WaveStrap’s controlled startup behavior.</p>
-                        <ul>
-                            <li>Starts Roblox directly through a managed process path</li>
-                            <li>Supports downgraded clients when compatibility matters</li>
-                            <li>Allows launch requests to be intercepted through protocol hooks</li>
-                            <li>Prepares multi-instance state before launch</li>
-                            <li>Can recover broken or missing installs automatically</li>
-                        </ul>
-                    </section>
-
-                    <section class="card" id="versions">
-                        <h2>Version Tracking and Downgrade</h2>
-                        <p>WaveStrap is version-aware in two different directions. It can ask Roblox for the current live WindowsPlayer version, and it can also query external APIs for past versions. This is what makes downgrade support possible.</p>
-                        <p>The <b>LiveVersionTracker</b> fetches the active LIVE version from Roblox’s client settings endpoint. The <b>RddClient</b> and <b>WeaoClient</b> talk to Wave-related services that expose past version information. Together, they allow WaveStrap to identify both the present version state and a target version for downgrade flows.</p>
-                        <div class="split">
-                            <div class="code">internal static class LiveVersionTracker { ... }</div>
-                            <div class="code">internal sealed class RddClient { ... }</div>
-                        </div>
-                        <div class="code">internal static class WeaoClient { ... }</div>
-                    </section>
-
-                    <section class="card" id="protocols">
-                        <h2>Protocol Registration</h2>
-                        <p>Protocol registration is one of the features that makes WaveStrap behave like a true bootstrapper. Instead of only being launched manually, it can register itself as the handler for both a custom <b>wave</b> scheme and the <b>roblox-player</b> scheme.</p>
-                        <p>That means browser play actions or direct protocol links can be redirected into WaveStrap first. Once intercepted, WaveStrap decides how to handle the launch, which allows the rest of the environment to stay consistent.</p>
-                        <div class="code">public static void Ensure(bool robloxHookEnabled) { Register(WaveScheme); if (robloxHookEnabled) { if (!IsHookedToThisExe(RobloxScheme)) Register(RobloxScheme); } else { UnregisterHKCU(RobloxScheme); } }</div>
-                        <div class="code">private static void Register(string scheme) { var exe = GetExePath(); using var key = Registry.CurrentUser.CreateSubKey(`Software\Classes\${scheme}`); key.SetValue("", `URL:${scheme} Protocol`); key.SetValue("URL Protocol", ""); using var cmd = key.CreateSubKey("shell\open\command"); cmd.SetValue("", `"${exe}" "%1"`); }</div>
-                    </section>
-
-                    <section class="card" id="pending">
-                        <h2>Pending Launch Handling</h2>
-                        <p>The <b>PendingLaunch</b> helper shows that WaveStrap is designed to preserve launch state when needed. Incoming URIs can be written into a file under LocalAppData, then read back and cleared later. This is useful when a launch request needs to survive a boot or setup transition before it is actually processed.</p>
-                        <p>That might look like a small helper file, but architecturally it is important. It shows that WaveStrap supports launch orchestration, not just immediate execution.</p>
-                        <div class="code">public static class PendingLaunch { ... }</div>
-                    </section>
-
-                    <section class="card" id="repair">
-                        <h2>Install and Repair Services</h2>
-                        <p><b>InstallService</b> gives WaveStrap real recovery capability. If the correct live version is missing or invalid, WaveStrap downloads the official Roblox installer, launches it, waits for a valid version folder to appear, and then cleans up redundant installer files. It can also force a clean install by removing version folders first.</p>
-                        <p>This means WaveStrap is not passive. It does not just fail when Roblox is broken. It actively repairs the install chain and brings the client back into a usable state.</p>
-                        <div class="code">public static async Task&lt;string&gt; EnsureRobloxInstalledAndGetLatestVersionDirAsync(...) { ... }</div>
-                    </section>
-                </main>
-            </div>
-
-            <div class="footer">
-                WaveStrap • Built for the Wave Ecosystem
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+    div class=footer
+    div
+  div
+div
+body
+html
